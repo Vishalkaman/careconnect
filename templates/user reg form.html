@@ -18,6 +18,7 @@
         <label for="toggle">Already have an account? Toggle to Login:</label>
         <input type="checkbox" id="toggle" onclick="toggleForm()">
     </div>
+    <b><p style="color: red;">{{ error_message }} !</p></b>
 
     <form id="registration-form" action="{{ url_for('register') }}" method="post">
         <!-- Registration Form Fields -->
@@ -56,7 +57,6 @@
 
         <input type="submit" value="Login">
     </form>
-<h2>{{ error_message }}</h2>
 </div>
  
 <script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,63 +8,48 @@
     <title>User Institution/Login Form</title>
     <link rel="stylesheet" href="../static/css/form.css">
 </head>
+
 <body>
 
-   
 
-<div class="form-container">
-    <h2 id="form-title">Carehome Registration</h2>
 
-    <div class="toggle-container">
-        <label for="toggle">Already have an account? Toggle to Login:</label>
-        <input type="checkbox" id="toggle" onclick="toggleForm()">
+    <div class="form-container">
+        <h2 id="form-title">Sponsor An Event</h2>
+
+        <form id="registration-form" action="{{ url_for('add_sponsor') }}" method="post">
+            <!-- Registration Form Fields -->
+
+            <label for="event">Event</label>
+            <select id="event" name="event">
+                <option value="Music and Dance Therapy">Music and Dance Therapy</option>
+                <option value="Story Telling Sessions">Story Telling Sessions</option>
+                <option value="Gardnening Workshops">Gardnening Workshops</option>
+                <option value="Health And Wellness">Health And Wellness</option>
+                <option value="Education/Technology">Education/Technology</option>
+            </select>
+            <br>
+            <br>
+
+            <label for="carehome">Carehome</label>
+            <select id="carehome" name="carehome">
+                {% for carehome in carehomes %}
+                <option value="{{ carehome[0] }}"> {{ carehome[1] }} </option>
+                {% endfor %}
+            </select>
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+            <br>
+            <br>
+
+
+            <input type="submit" value="Sponsor">
+        </form>
+
+        <h2>{{ error_message }}</h2>
     </div>
 
-    <form id="registration-form" action="{{ url_for('register_carehome') }}" method="post">
-        <!-- Registration Form Fields -->
-
-        <label for="event">Event</label>
-        <select id="event" name="event">
-            <option value="Music and Dance Therapy">Music and Dance Therapy</option>
-            <option value="Story Telling Sessions">Story Telling Sessions</option>
-            <option value="Gardnening Workshops">Gardnening Workshops</option>
-            <option value="Health And Wellness">Health And Wellness</option>
-            <option value="Education/Technology">Education/Technology</option>
-        </select>
-        
-
-        <label for="type">Type of Carehome</label>
-        <select id="type" name="type">
-            <option value="orpganage">Orpganage</option>
-            <option value="oldagehome">Oldagehome</option>
-        </select>
-        <br>
-        <br>
-
-
-        <input type="submit" value="Register">
-    </form>
-
-<h2>{{ error_message }}</h2>
-</div>
- 
-<script>
-    function toggleForm() {
-        var registrationForm = document.getElementById("registration-form");
-        var loginForm = document.getElementById("login-form");
-        var formTitle = document.getElementById("form-title");
-
-        if (document.getElementById("toggle").checked) {
-            registrationForm.style.display = "none";
-            loginForm.style.display = "block";
-            formTitle.innerText = "User Login";
-        } else {
-            registrationForm.style.display = "block";
-            loginForm.style.display = "none";
-            formTitle.innerText = "User Registration";
-        }
-    }
-</script>
 
 </body>
+
 </html>

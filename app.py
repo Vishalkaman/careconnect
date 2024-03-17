@@ -34,6 +34,15 @@ def get_user(username):
         return p_id[0] if p_id else None 
     return None
 
+def get_institution(username):
+    if username:
+        query = "SELECT org_id FROM institutions WHERE org_name = %s;"
+        cursor = mysql.cursor()
+        cursor.execute(query, (username,))
+        p_id = cursor.fetchone()  # Use fetchone to get a single result
+        return p_id[0] if p_id else None 
+    return None
+
 def get_carehome_by_id(c_id):
     query = "select c_name from orphanage_oldagehome where c_id = %s"
     cursor = mysql.cursor()
@@ -137,15 +146,23 @@ def donate():
 
 @app.route('/sponsor.html')
 def sponsor():
+    cursor = mysql.cursor()
+    query = "SELECT c_id, c_name FROM orphanage_oldagehome"
+    cursor.execute(query)
+    carehomes = cursor.fetchall()
     if not isLoggedIn:
         return  render_template("button_page.html")
-    return render_template('sponsor.html')
+    return render_template('sponsor.html', carehomes=carehomes)
 
 
 @app.route('/calendar.html')
 def calendar():
+    cursor = mysql.cursor()
+    query = "SELECT s_event, date FROM sponsor"
+    cursor.execute(query)
+    sponsors = cursor.fetchall()
     # Sample query to fetch data from a table
-    return render_template('calendar.html')
+    return render_template('calendar.html', sponsors=sponsors)
 
 @app.route('/register_login')
 def register_login():
@@ -298,6 +315,7 @@ def authenticate_user(username, password):
 def login():
     global isLoggedIn
     global g_username
+    global isInstitution
 
     if request.method == 'POST':
         username = request.form['username']
@@ -306,6 +324,7 @@ def login():
         if authenticate_user(username, password):
             # If authentication is successful, store the user in the session
             isLoggedIn = True
+            isInstitution = False
             g_username = username
 
             session['username'] = username
@@ -320,6 +339,18 @@ def login():
 
 
 #=============== LOGIN ==========================
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    global isLoggedIn
+    global g_username
+    isLoggedIn = False
+    g_username = ''
+    return redirect(url_for('index'))
+
+
+#=============== LOGOUT ==========================
+
+#=============== LOGOUT ==========================
 
 #=============== REGISTRATION AND LOGIN FOR INSTITUTINON ==========================
 def add_institution_to_database(org_id, org_name,org_contact, periodic_donation, password, confirm_password):
@@ -379,7 +410,7 @@ def login_institution():
             return redirect(url_for('index'))
         else:
             error_message = "Invalid username or password"
-            return render_template('user reg form.html', error_message=error_message)
+            return render_template('institution_reg.html', error_message=error_message)
 
     return render_template('login.html')
 
@@ -418,6 +449,40 @@ def register_carehome():
 
 
 #=============== REGISTRATION  FOR CAREHOME ==========================
+
+
+#=============== ADD SPONSOR ==========================
+
+
+
+#=============== ADD SPONSOR ==========================
+
+@app.route('/add_sponsor', methods=['POST'])
+def add_sponsor():
+    global g_username
+    if request.method == 'POST':
+        s_id = get_number_of_entries(f'sponsor') + 2
+        s_event = request.form['event']
+        date = request.form['date']
+        c_id = request.form['carehome']
+        if not isInstitution:
+            s_type = 'individual'
+            p_id = get_user(g_username)
+            org_id = None
+        else:
+            s_type = 'institution'
+            org_id = get_institution(g_username)
+            p_id = None
+
+    sponsor_data = (s_id, s_type, s_event, c_id, p_id, org_id, date)
+    insert_query = "INSERT INTO sponsor (s_id, s_type, s_event, c_id, p_id, org_id, date) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+
+    cursor = mysql.cursor()
+    cursor.execute(insert_query, sponsor_data)
+    mysql.commit()
+    return redirect(url_for('calendar'))
+
+
 #=============== MONETARY DONATION ==========================
 
 def add_dontation(d_id, d_date, d_type, d_cat, d_amount, p_id, c_id):

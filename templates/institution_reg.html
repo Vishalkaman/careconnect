@@ -12,12 +12,14 @@
    
 
 <div class="form-container">
-    <h2 id="form-title">User Registration</h2>
+    <h2 id="form-title">Institution Registration</h2>
 
     <div class="toggle-container">
         <label for="toggle">Already have an account? Toggle to Login:</label>
         <input type="checkbox" id="toggle" onclick="toggleForm()">
     </div>
+
+    <b><p style="color: red;">{{ error_message }} !</p></b>
 
     <form id="registration-form" action="{{ url_for('register_institution') }}" method="post">
         <!-- Registration Form Fields -->
@@ -57,7 +59,6 @@
 
         <input type="submit" value="Login">
     </form>
-<h2>{{ error_message }}</h2>
 </div>
  
 <script>
@@ -69,11 +70,11 @@
         if (document.getElementById("toggle").checked) {
             registrationForm.style.display = "none";
             loginForm.style.display = "block";
-            formTitle.innerText = "User Login";
+            formTitle.innerText = "Institution Login";
         } else {
             registrationForm.style.display = "block";
             loginForm.style.display = "none";
-            formTitle.innerText = "User Registration";
+            formTitle.innerText = "Institution Registration";
         }
     }
 </script>
