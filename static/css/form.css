@@ -69,6 +69,8 @@ nav a:hover {
 
 /* Form Styles */
 .form-container {
+    max-height: 95vh;
+    overflow-y: auto;
     max-width: 100%; /* Adjust this value as needed */
     margin: 0 auto;
     padding: 20px;
