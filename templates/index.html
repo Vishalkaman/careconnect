@@ -15,8 +15,13 @@
         <h1>Care Connect</h1>
         <p>Bridging Lives, Reducing Waste, Weaving Sustainability</p>
         <div id="user" style="position: absolute; top: 2rem; right: 0; transform: translateY(-50%);">
-        {% if isLoggedIn %}
+        {% if isLoggedIn and not isInstitution %}
             <i class="fas fa-user" style="font-size: 24px; color: #fff; margin-right: 10px; position: relative;"></i><br>
+            <span style="margin-right: 10px;"> {{username }}</span> <br>
+        {% endif %}
+
+        {% if isLoggedIn and isInstitution %}
+            <i class="fas fa-university" style="font-size: 24px; color: #fff; margin-right: 10px; position: relative;"></i><br>
             <span style="margin-right: 10px;"> {{username }}</span> <br>
         {% endif %}
 
@@ -26,7 +31,7 @@
         
         <script>
             function redirectToRegister() {
-                window.location.href = "/register_login";
+                window.location.href = "/button_page.html";
             }
         </script>
     </div>
@@ -40,6 +45,7 @@
             <li><a href="aboutus.html">About Us</a></li> 
             <li><a href="volunteer.html">Volunteer</a></li>
             <li><a href="donate.html">Donate</a></li>
+            <li><a href="sponsor.html">Sponsor</a></li>
             <li><a href="calendar.html">Calendar</a></li>
             <li><a href="community.html">Community</a></li>
         </ul>

@@ -17,14 +17,15 @@
             <li><a href="aboutus.html">About Us</a></li> 
             <li><a href="volunteer.html">Volunteer</a></li>
             <li><a href="donate.html">Donate</a></li>
+            <li><a href="sponsor.html">Sponsor</a></li>
             <li><a href="calendar.html">Calendar</a></li>
             <li><a href="community.html">Community</a></li>
         </ul>
     </nav>
     <div class="button-container">
-        <button class="button">USER</button>
-        <button class="button">CAREHOMES</button>
-        <button class="button">INSTITUTIONS</button>
+        <a href="{{ url_for('register_login') }}"<button class="button">USER</button></a>
+        <a href="{{url_for('carehome_registration')}}"<button class="button">CAREHOMES</button></a>
+        <a href="{{url_for('register_login_institution')}}"<button class="button">INSTITUTIONS</button></a>
     </div>
     <footer>
         <p>&copy; 2024 Care Connect | Contact: info@harmonylink.org</p>

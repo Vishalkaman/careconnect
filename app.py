@@ -12,6 +12,7 @@ from generate_bill import generate_receipt
 app = Flask(__name__)
 
 isLoggedIn = False
+isInstitution = False
 g_username = ''
 backup_file = 'db.sql'
 
@@ -80,13 +81,19 @@ except Exception as e:
 @app.route('/')
 def home():
     # Sample query to fetch data from a table
-    return render_template('index.html', isLoggedIn=isLoggedIn, username=g_username)
+    return render_template('index.html', isLoggedIn=isLoggedIn,isInstitution=isInstitution, username=g_username)
 
 
 @app.route('/index.html')
 def index():
     # Sample query to fetch data from a table
-    return render_template('index.html', isLoggedIn=isLoggedIn, username=g_username)
+    return render_template('index.html', isLoggedIn=isLoggedIn,isInstitution=isInstitution, username=g_username)
+
+@app.route('/button_page.html')
+def button_page():
+    # Sample query to fetch data from a table
+    return render_template('button_page.html')
+
 
 @app.route('/aboutus.html')
 def aboutus():
@@ -127,6 +134,14 @@ def donate():
         else:
             return render_template('user reg form.html', carehomes=carehomes)
 
+
+@app.route('/sponsor.html')
+def sponsor():
+    if not isLoggedIn:
+        return  render_template("button_page.html")
+    return render_template('sponsor.html')
+
+
 @app.route('/calendar.html')
 def calendar():
     # Sample query to fetch data from a table
@@ -141,6 +156,11 @@ def register_login():
 def register_login_institution():
     # Sample query to fetch data from a table
     return render_template('institution_reg.html')
+
+@app.route('/carehome_registration')
+def carehome_registration():
+    # Sample query to fetch data from a table
+    return render_template('register_carehome.html')
 
 @app.route('/donationcomplete')
 def donationcomplete():
@@ -254,7 +274,7 @@ def register():
 
         success, error_message = add_user_to_database(p_id, p_name, p_age, password, confirm_password, address, contact)
 
-        return render_template('index.html', success=success, error_message=error_message)
+        return redirect(url_for('index'))
 
 
 #=============== REGISTRATION ==========================
@@ -328,24 +348,34 @@ def register_institution():
 
         success, error_message = add_institution_to_database(org_id, org_name,org_contact, periodic_donation, password, confirm_password)
 
-        return render_template('index.html', success=success, error_message=error_message)
+        return redirect(url_for('index'))
 
+def authenticate_institution(i_name, password):
+    cursor = mysql.cursor()
+    cursor.execute("SELECT * FROM institutions WHERE org_name=%s AND password=%s", (i_name, password))
+    user = cursor.fetchone()
+    if user:
+        return True
+    else:
+        return False
 
 @app.route('/login_institution', methods=['GET', 'POST'])
 def login_institution():
     global isLoggedIn
     global g_username
+    global isInstitution
 
     if request.method == 'POST':
-        username = request.form['username']
+        i_name = request.form['i_name']
         password = request.form['password']
 
-        if authenticate_user(username, password):
-            # If authentication is successful, store the user in the session
+        if authenticate_institution(i_name, password):
             isLoggedIn = True
-            g_username = username
+            isInstitution = True
+            g_username = i_name
 
-            session['username'] = username
+            session['username'] = i_name
+            print(isInstitution)
             return redirect(url_for('index'))
         else:
             error_message = "Invalid username or password"
@@ -355,7 +385,39 @@ def login_institution():
 
 #=============== REGISTRATION AND LOGIN FOR INSTITUTINON ==========================
 
+#=============== REGISTRATION  FOR CAREHOME ==========================
 
+def add_carehome_to_database(c_id, c_name, c_location, c_contact, c_count, c_type):
+    carehome_data = (c_id, c_name, c_location, c_contact, c_count, c_type)
+    insert_query = "INSERT INTO orphanage_oldagehome (c_id, c_name, c_location, c_contact, c_count, c_type) VALUES (%s, %s, %s, %s, %s, %s)"
+
+    cursor = mysql.cursor()
+    cursor.execute(insert_query, carehome_data)
+    mysql.commit()
+
+    return True, None
+
+@app.route('/register_carehome', methods=['POST'])
+def register_carehome():
+    #org_id, org_name, org_contact, periodic_donattion, password
+    if request.method == 'POST':
+        c_id = get_number_of_entries(table='orphanage_oldagehome') + 1
+        c_name = request.form['c_name']
+        c_location = request.form['location']
+        c_contact = request.form['contact']
+        c_count = request.form['count']
+        c_type = request.form['type']
+
+        success, error_message = add_carehome_to_database(c_id, c_name, c_location, c_contact, c_count, c_type)
+
+        return render_template('carehome_reg_success.html')
+
+
+
+
+
+
+#=============== REGISTRATION  FOR CAREHOME ==========================
 #=============== MONETARY DONATION ==========================
 
 def add_dontation(d_id, d_date, d_type, d_cat, d_amount, p_id, c_id):
