@@ -1,0 +1,176 @@
+:root {
+    --white: #e1d9ff;
+    --dark-purple: #2b1444;
+    --train-purple: #572b83;
+    --train-window: #d4aa71;
+    --shooting-star-purple: #502b8c;
+    --light-pink: #b65b8d;
+    --dark-pink: #863c82;
+    --dono-ka-sar: #9c6bc3;
+}
+/* Header Styles */
+header {
+    background-color: var(--train-purple);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    animation: zoomIn 1s ease-in-out;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-style: italic;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+
+/* Navigation Styles */
+nav {
+    background-color: var(--train-window);
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark-purple);
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: var(--shooting-star-purple);
+}
+/* Footer Styles */
+footer {
+    background-color: var(--train-window);
+    text-align: center;
+    padding: 0.1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+footer p {
+    color: var(--dark-purple);
+    font-size: 0.8rem;
+}
+
+
+/* Animations */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-pink);
+    color: var(--dark-purple);
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: var(--shooting-star-purple);
+}
+
+h3 {
+    color: var(--shooting-star-purple);
+}
+
+.feature, .team-member {
+    margin-bottom: 20px;
+}
+/* Add this CSS for FAQ section */
+#faq {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#faq h2 {
+    color: var(--shooting-star-purple);
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-item input {
+    display: none;
+}
+
+.faq-item label {
+    display: block;
+    background-color: var(--train-window);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.faq-item input:checked + label {
+    background-color: var(--train-purple);
+    color: var(--white);
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: var(--train-window);
+    border-radius: 5px;
+}
+
+.faq-item input:checked + label + .faq-answer {
+    display: block;
+}
+
+

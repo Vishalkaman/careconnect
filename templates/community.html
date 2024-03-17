@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback and Reviews</title>
+    <link rel="stylesheet" href="../static/css/community.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header>
+        <header>
+      <h1>Care Connect</h1>
+      <p>Bridging Lives, Reducing Waste, Weaving Sustainability</p>
+       <h1>Community Canvas</h1>
+    </header>
+<nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li> 
+            <li><a href="volunteer.html">Volunteer</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="community.html">Community</a></li>
+        </ul>
+    </nav>
+<section>
+
+<!-- Social Media Section -->
+<section class="social-media-section">
+    <h3>Interactive Storytelling</h3>
+
+    <!-- Story Clip Container -->
+    <div class="story-clip-container" id="storyClipContainer">
+        <!-- Sample Story Clip (Repeat this structure for multiple clips) -->
+        <div class="story-clip">
+           <video controls>
+        <source src="../static/vid/community_vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+            <p class="story-text">Listen to Juliana's story as she reminisces about her days as a young dancer, her eyes bright with the memories of a bygone era, now finding solace in the companionship of fellow residents at the old-age home.</p>
+            <div class="interactions">
+                <button class="like-button" onclick="likeStory(this)">Like</button>
+                <button class="share-button" onclick="shareStory(this)">Share</button>
+            </div>
+        </div>
+        <div class="story-clip">
+            <video controls>
+                <source src="../static/vid/community vid 2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="story-text">Catch a glimpse of Mrs. Johnson, once a revered teacher whose passion for knowledge ignited young minds. Now, in the tranquil embrace of the old-age home, she imparts wisdom gleaned from a lifetime of experience to eager listeners</p>
+            <div class="interactions">
+                <button class="like-button" onclick="likeStory(this)">Like</button>
+                <button class="share-button" onclick="shareStory(this)">Share</button>
+            </div>
+        </div>
+        <div class="story-clip">
+            <video controls>
+                <source src="../static/vid/community_vid3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="story-text">Despite polio's challenges, Timmy, a 5-year-old in the orphanage, radiates resilience, finding joy in small victories and the warmth of companionship amidst the echoing laughter of childhood.</p>
+            <div class="interactions">
+                <button class="like-button" onclick="likeStory(this)">Like</button>
+                <button class="share-button" onclick="shareStory(this)">Share</button>
+            </div>
+        </div>
+        <!-- End of Sample Story Clip -->
+    </div>
+</section>
+
+<!-- Feedback and Reviews Section -->
+<section class="feedback-section">
+    <h2>Feedback and Experience</h2>
+
+    <!-- Care Home Feedback -->
+    <div class="care-home-feedback">
+
+        <!-- Review Box 1 -->
+        <div class="review-box">
+            <h3>Abhayadhama (Home for Street Boys)1</h3>
+            <div class="user-comment">Excellent care and facilities. Highly recommended!</div>
+        </div>
+
+        <!-- Review Box 2 -->
+        <div class="review-box">
+            <h3>Good Shepherd Home for the Children</h3>
+            <div class="user-comment">Friendly staff, but some improvements needed in cleanliness.</div>
+        </div>
+
+        <!-- Review Box 3 -->
+        <div class="review-box">
+            <h3>The Sunshine Old Age Home</h3>
+            <div class="user-comment">Wonderful atmosphere. My loved ones are well taken care of.</div>
+        </div>
+
+        <!-- Add more review boxes as needed -->
+
+        <!-- User Feedback Form for Logged In Users -->
+        <div class="user-feedback-form">
+            <h4>Share your experience</h4>
+        <form id="feedback-form" action="{{ url_for('submit_feedback') }}" method="post">
+        
+        <label for="comment">Comment:</label><br>
+        <input type="text" id="comment" name="comment"><br><br>
+        
+        <select id="carehome" name="carehome">
+            {% for carehome in carehomes %}
+            <option value="{{ carehome[0] }}"> {{ carehome[1] }} </option>
+            {% endfor %}
+        </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add more care homes as needed -->
+
+</section>
+<script src="main.js"></script>
+<footer>
+        <p>&copy; 2024 Care Connect | Contact: info@harmonylink.org</p>
+    </footer>
+
+</body>
+</html>

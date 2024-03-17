@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration/Login Form</title>
+    <link rel="stylesheet" href="../static/css/form.css">
+</head>
+<body>
+
+   
+
+<div class="form-container">
+    <h2 id="form-title">User Registration</h2>
+
+    <div class="toggle-container">
+        <label for="toggle">Already have an account? Toggle to Login:</label>
+        <input type="checkbox" id="toggle" onclick="toggleForm()">
+    </div>
+
+    <form id="registration-form" action="{{ url_for('register') }}" method="post">
+        <!-- Registration Form Fields -->
+        <label for="p_id">Id:</label>
+        <input type="number" id="p_id" name="p_id" required><br>
+
+        <label for="p_name">Username:</label>
+        <input type="text" id="p_name" name="p_name" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><br>
+
+        <label for="p_age">Age:</label>
+        <input type="number" id="p_age" name="p_age" required><br>
+
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea><br>
+
+        <label for="contact">Contact:</label>
+        <textarea id="contact" name="contact" rows="4" required></textarea><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <form id="login-form" action="{{ url_for('login') }}" method="post" style="display: none;">
+        <!-- Login Form Fields -->
+        <label for="username">Username/Email:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <input type="submit" value="Login">
+    </form>
+<h2>{{ error_message }}</h2>
+</div>
+ 
+<script>
+    function toggleForm() {
+        var registrationForm = document.getElementById("registration-form");
+        var loginForm = document.getElementById("login-form");
+        var formTitle = document.getElementById("form-title");
+
+        if (document.getElementById("toggle").checked) {
+            registrationForm.style.display = "none";
+            loginForm.style.display = "block";
+            formTitle.innerText = "User Login";
+        } else {
+            registrationForm.style.display = "block";
+            loginForm.style.display = "none";
+            formTitle.innerText = "User Registration";
+        }
+    }
+</script>
+
+</body>
+</html>

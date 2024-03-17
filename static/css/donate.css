@@ -1,0 +1,187 @@
+/* Add the provided color palette */
+:root {
+    --white: #e1d9ff;
+    --dark-purple: #2b1444;
+    --train-purple: #572b83;
+    --train-window: #d4aa71;
+    --shooting-star-purple: #502b8c;
+    --light-pink: #b65b8d;
+    --dark-pink: #863c82;
+    --dono-ka-sar: #9c6bc3;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--dark-purple);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--train-purple);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    animation: zoomIn 1s ease-in-out;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-style: italic;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: var(--train-window);
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark-purple);
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: var(--shooting-star-purple);
+}
+
+/* Main Content Styles */
+section {
+    padding: 2rem;
+    background-color:var(--white);
+    color:#2b1444;
+}
+
+section h2 {
+    color: var(--train-purple);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: zoomIn 1s ease-in-out;
+}
+
+section p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--train-window);
+    color: var(--dark-purple);
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Form Styles */
+.donation-form,
+#foodDonationForm,
+#textileDonationForm {
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #4b2863; /* Updated color for better contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff; /* Updated label color for better visibility */
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff; /* Updated input background color */
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--light-pink); /* Use light pink color */
+    color: var(--dark-purple); /* Text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: var(--shooting-star-purple); /* Darker pink on hover */
+    color: white; /* Text color on hover */
+}
+
+#customAmountDiv {
+    display: none;
+}
+
+/* Animations */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+

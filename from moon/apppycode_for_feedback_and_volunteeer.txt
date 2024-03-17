@@ -1,0 +1,46 @@
+##app.py code for volunteer pl check algos
+
+def get_activity(activity):
+    if activity == "1":
+        return "Painting"
+    elif activity == "2":
+        return "Teaching"
+    elif activity == "3":
+        return "Emotional Support"
+    elif activity == "4":
+        return "Games and Activities"
+    elif activity == "5":
+        return "Reading Sessions"
+    elif activity == "6":
+        return "Health Checkups"
+    elif activity == "7":
+        return "Arts and Crafts"
+
+def add_volunteer_entry(v_id, DOJ, visit_number, p_id, activity):
+@app.route('/volunteer_submission', methods=['POST'])
+def volunteer_submission():
+    if request.method == 'POST':
+        v_id = get_number_of_entries('volunteer') + 1
+        DOJ = request.form['DOJ']
+        visit_number = request.form['visit_number']
+        p_id = request.form['p_id']
+        activity = get_activity(request.form['activity'])
+
+        success, error_message = add_volunteer_entry(v_id, DOJ, visit_number, p_id, activity)
+
+        if success:
+            return render_template('success_v.html', success=True, error_message=None)
+        else:
+            return render_template('success_v.html', success=False, error_message=error_message)
+
+
+##app.py code for feedback
+
+@app.route('/submit_feedback', methods=['POST'])
+def submit_feedback():
+    if request.method == 'POST':
+        review_id = request.form['review_id']
+        comment = request.form['comment']
+        orphanage_id = request.form['orphanage_id']
+
+        success, error_message = add_feedback(review_id, comment, orphanage_id)

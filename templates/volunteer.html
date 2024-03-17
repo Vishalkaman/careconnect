@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Page</title>
+    <link rel="stylesheet" href="../static/css/volunteer.css">
+</head>
+<body>
+
+<header>
+        <header>
+      <h1>Care Connect</h1>
+      <p>Bridging Lives, Reducing Waste, Weaving Sustainability</p>
+       <h1>Volunteer Nexus: Connecting Hearts, Changing Lives</h1>
+    </header>
+<!-- Navigation Bar -->
+<nav>
+   <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li> 
+            <li><a href="volunteer.html">Volunteer</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
+            <li><a href="community.html">Community</a></li>
+            
+        </ul>
+</nav>
+
+<!-- Connect Page Sections -->
+<section class="carehomedir">
+
+    <h2>Connect with Us</h2>
+
+    <!-- Care Homes Directory Section -->
+    <div class="directory-section">
+        <h3>Care Homes Directory</h3>
+        <p>Explore and connect with care homes in your area.</p>
+
+        <!-- Browse Care Homes Option -->
+        <div class="directory-option">
+            <h4>Browse Care Homes</h4>
+            <p>View a list of all care homes in our directory.</p>
+            <a href="{{ url_for('carehomes') }}">
+                <button>Start Browsing</button>
+            </a>
+        </div>
+
+        <!-- Find Nearby Care Homes Option -->
+        <div class="directory-option">
+            <h4>Find Nearby Care Homes</h4>
+            <p>Enter your location to find care homes nearby.</p>
+            <!-- Add a form for entering location -->
+            <form>
+                <label for="location">Enter Your Location:</label>
+                <input type="text" id="location" name="location" placeholder="E.g., City, Zip Code">
+                <button type="submit">Find Care Homes</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+    <!-- Skill Sharing Section -->
+<section id="skillshare">
+   <div class="skill-sharing-section">
+    <h3>Skill Sharing</h3>
+    <p>Share your skills and learn from others in our community.</p>
+    <form id="skillSharingForm" action="{{ url_for('volunteer_submission') }}" method="POST">
+        <label for="visit_number">Visit Number:</label><br>
+        <input type="number" id="visit_number" name="visit_number" required><br><br>
+        
+        <label for="activity">Activity:</label><br>
+        <select id="activity" name="activity" required>
+            <option value="">Select Activity</option>
+            <option value="1">Painting</option>
+            <option value="2">Teaching</option>
+            <option value="3">Emotional Support</option>
+            <option value="4">Games and Activities</option>
+            <option value="5">Reading Sessions</option>
+            <option value="6">Health Checkups</option>
+            <option value="7">Arts and Crafts</option>
+        </select><br><br>      
+         <button type="submit">Submit</button>
+    </form>
+    <!-- Add more content or features as needed -->
+    <div id="skill-listings">
+        <!-- Skill listings will be dynamically added here using JavaScript -->
+    </div>
+</div>
+</section>
+
+
+
+
+
+
+<section id="remote-volunteering">
+    <div class="remote-volunteering-section">
+         <h2>Join Us as a Digital Impact Volunteer!</h2>
+        <p>Contribute to our causes from the comfort of your home.</p>
+        <form id="digitalImpactVolunteerForm" action="submit_volunteer_form.php" method="POST">
+
+            <!-- Time Commitment Dropdown -->
+            <label for="timeCommitment">Preferred Time Commitment:</label>
+            <select id="timeCommitment" name="timeCommitment" required>
+                <option value="5">5 hours per week</option>
+                <option value="10">10 hours per week</option>
+                <option value="15">15 hours per week</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <!-- Volunteer Preferences -->
+            <label for="volunteerPreferences">What type of digital tasks interest you?</label>
+            <textarea id="volunteerPreferences" name="volunteerPreferences" rows="4" placeholder="Tell us about your interests and preferences" required></textarea>
+
+            <!-- Technical Skills -->
+            <label for="technicalSkills">Your Digital Skills:</label>
+            <input type="text" id="technicalSkills" name="technicalSkills" placeholder="e.g., Social Media Management, Graphic Design" required>
+
+            <!-- Previous Volunteer Experience -->
+            <label for="prevVolunteerExperience">Share your digital volunteering experience:</label>
+            <textarea id="prevVolunteerExperience" name="prevVolunteerExperience" rows="4" placeholder="Describe your previous digital volunteering activities"></textarea>
+
+            <!-- Motivation -->
+            <label for="motivation">What motivates you to digitally volunteer?</label>
+            <textarea id="motivation" name="motivation" rows="4" placeholder="Tell us about your motivation to join as a digital impact volunteer"></textarea>
+
+            <!-- Additional Information -->
+            <label for="additionalInfo">Anything else you'd like us to know?</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Feel free to share any additional information"></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+        <!-- Add more content or features as needed -->
+
+    </div>
+</section>
+<script src="main.js"></script>
+ <footer>
+        <p>&copy; 2024 Care Connect | Contact: info@harmonylink.org</p>
+    </footer>
+<!-- Your existing content -->
+
+<!-- Include script for any interactive features -->
+
+</body>
+</html>

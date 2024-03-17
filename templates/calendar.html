@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Connect Calendar</title>
+    <link rel="stylesheet" href="../static/css/calender.css">
+
+    <!-- Include FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+</head>
+<body>
+<header>
+      <h1>Care Connect</h1>
+      <p>Bridging Lives, Reducing Waste, Weaving Sustainability</p>
+      <h1>Calendar</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="community.html">Community</a></li>
+      </ul>
+    </nav>
+
+<!-- Calendar Section -->
+<section>
+    <div id="calendar"></div>
+    <div class="events-box">
+        <h3>Events this Month</h3>
+        <ul>
+            <li>Art and Craft Workshop:February 1 - February 3</li>
+            <li>Music Therapy Session: February 5 - February 7</li>
+            <li>Gardening Workshops: February 10 - February 12</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Include script to initialize FullCalendar -->
+<script>
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: [
+                {
+                    title: ' Art and Craft Workshop',
+                    start: '2024-02-01',
+                    end: '2024-02-03',
+                    description: '"Good will care home",Painting, drawing, and other visual arts activities.'
+                },
+                {
+                    title: 'Music Therapy Session',
+                    start: '2024-02-05',
+                    end: '2024-02-07',
+                    description: '"Bala Yesu Bhavana", Music therapy session including various musical activities.'
+                },
+                {
+                    title: 'Gardening Workshops',
+                    start: '2024-02-10',
+                    end: '2024-02-12',
+                    description: '"Asha nandana", Gardening tips, plant care, and hands-on gardening activities.'
+                },
+                // Add more events as needed
+            ],
+            eventRender: function (event, element) {
+                element.attr('title', event.description);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
+

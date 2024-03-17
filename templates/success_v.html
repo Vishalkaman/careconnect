@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submitted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .tick {
+            color: #4CAF50; /* Green color */
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 24px;
+            color: #333;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049; /* Darker shade of green */
+        }
+    </style>
+</head>
+<body>
+    {% if success %}
+    <div class="tick">&#10004;</div>
+    <div class="message">Thank you for joining hands with CareConnect!</div>
+    <div>Your form has been submitted successfully.<br>Our officials will contact you soon.<br>Please check your inbox.</div>
+    <br><br>
+    <a href="index.html" class="btn">Go back to home</a>
+    <a href="volunteers_list.html" class="btn">Veiw Volunteers</a>
+    {% endif %}
+
+    {% if not success  %}
+    <p>Please login</p>
+    {% endif %}
+</body>
+</html>
+

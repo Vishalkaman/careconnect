@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers</title>
+    <link rel="stylesheet" href="../static/css/carehomes.css">
+</head>
+<body>
+    <h1>Volunteers</h1>
+
+    <!-- Add a button to navigate to a specific route -->
+    <a href="{{ url_for('index') }}">
+        <button>Go to Home</button>
+    </a>
+
+    <table border="1">
+        <tr>
+            <th>Volunteer ID</th>
+            <th>DOJ</th>
+            <th>Visit Number</th>
+            <th>Name</th>
+            <th>Activity</th>
+            <!-- Add more columns based on your table structure -->
+        </tr>
+        {% for volunteer in volunteers %}
+            <tr>
+                <td>{{ volunteer[0] }}</td>
+                <td>{{ volunteer[1] }}</td>
+                <td>{{ volunteer[2] }}</td>
+                <td>{{ volunteer[3] }}</td>
+                <td>{{ volunteer[4] }}</td>
+                <!-- Add more cells based on your table structure -->
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
