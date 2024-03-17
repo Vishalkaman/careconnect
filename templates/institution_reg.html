@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Institution/Login Form</title>
+    <link rel="stylesheet" href="../static/css/form.css">
+</head>
+<body>
+
+   
+
+<div class="form-container">
+    <h2 id="form-title">User Registration</h2>
+
+    <div class="toggle-container">
+        <label for="toggle">Already have an account? Toggle to Login:</label>
+        <input type="checkbox" id="toggle" onclick="toggleForm()">
+    </div>
+
+    <form id="registration-form" action="{{ url_for('register_institution') }}" method="post">
+        <!-- Registration Form Fields -->
+
+        <label for="i_name">Institution Name:</label>
+        <input type="text" id="i_name" name="i_name" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><br>
+
+
+        <label for="contact">Contact:</label>
+        <input type="number" id="contact" name="contact" required><br>
+
+        <label for="contact">Are you willing to periodically donate?</label>
+        <select id="periodic_donation" name="periodic_donation">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <br>
+        <br>
+
+
+        <input type="submit" value="Register">
+    </form>
+
+    <form id="login-form" action="{{ url_for('login_institution') }}" method="post" style="display: none;">
+        <!-- Login Form Fields -->
+        <label for="Institution_name">Institution Name:</label>
+        <input type="text" id="i_name" name="i_name" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <input type="submit" value="Login">
+    </form>
+<h2>{{ error_message }}</h2>
+</div>
+ 
+<script>
+    function toggleForm() {
+        var registrationForm = document.getElementById("registration-form");
+        var loginForm = document.getElementById("login-form");
+        var formTitle = document.getElementById("form-title");
+
+        if (document.getElementById("toggle").checked) {
+            registrationForm.style.display = "none";
+            loginForm.style.display = "block";
+            formTitle.innerText = "User Login";
+        } else {
+            registrationForm.style.display = "block";
+            loginForm.style.display = "none";
+            formTitle.innerText = "User Registration";
+        }
+    }
+</script>
+
+</body>
+</html>

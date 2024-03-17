@@ -137,6 +137,11 @@ def register_login():
     # Sample query to fetch data from a table
     return render_template('user reg form.html')
 
+@app.route('/register_login_institution')
+def register_login_institution():
+    # Sample query to fetch data from a table
+    return render_template('institution_reg.html')
+
 @app.route('/donationcomplete')
 def donationcomplete():
     # Sample query to fetch data from a table
@@ -295,6 +300,60 @@ def login():
 
 
 #=============== LOGIN ==========================
+
+#=============== REGISTRATION AND LOGIN FOR INSTITUTINON ==========================
+def add_institution_to_database(org_id, org_name,org_contact, periodic_donation, password, confirm_password):
+    if password != confirm_password:
+        return False, "Passwords do not match"
+
+    institution_data = (org_id, org_name,org_contact, periodic_donation, password)
+    insert_query = "INSERT INTO institutions (org_id, org_name,org_contact, periodic_donation, password) VALUES (%s, %s, %s, %s, %s)"
+
+    cursor = mysql.cursor()
+    cursor.execute(insert_query, institution_data)
+    mysql.commit()
+
+    return True, None
+
+@app.route('/register_institution', methods=['POST'])
+def register_institution():
+    #org_id, org_name, org_contact, periodic_donattion, password
+    if request.method == 'POST':
+        org_id = get_number_of_entries(table='Institutions') + 1
+        org_name = request.form['i_name']
+        org_contact = request.form['contact']
+        periodic_donation = request.form['periodic_donation']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        success, error_message = add_institution_to_database(org_id, org_name,org_contact, periodic_donation, password, confirm_password)
+
+        return render_template('index.html', success=success, error_message=error_message)
+
+
+@app.route('/login_institution', methods=['GET', 'POST'])
+def login_institution():
+    global isLoggedIn
+    global g_username
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if authenticate_user(username, password):
+            # If authentication is successful, store the user in the session
+            isLoggedIn = True
+            g_username = username
+
+            session['username'] = username
+            return redirect(url_for('index'))
+        else:
+            error_message = "Invalid username or password"
+            return render_template('user reg form.html', error_message=error_message)
+
+    return render_template('login.html')
+
+#=============== REGISTRATION AND LOGIN FOR INSTITUTINON ==========================
 
 
 #=============== MONETARY DONATION ==========================
