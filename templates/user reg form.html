@@ -6,6 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration/Login Form</title>
     <link rel="stylesheet" href="../static/css/form.css">
+        <style>
+    #toggle:checked {
+        background-color: #6c63ff; /* Change color when checked */
+    }
+
+    #toggle::before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: white;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+        left: 4px; /* Adjust the position of the toggle indicator */
+    }
+
+    #toggle:checked::before {
+        transform: translate(20px, -50%); /* Move the toggle indicator when checked */
+        background-color: rgb(8, 101, 230);
+    }
+</style>
 </head>
 <body>
 
@@ -16,15 +39,12 @@
 
     <div class="toggle-container">
         <label for="toggle">Already have an account? Toggle to Login:</label>
-        <input type="checkbox" id="toggle" onclick="toggleForm()">
+        <input type="checkbox" id="toggle" onclick="toggleForm()" style="cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 40px; height: 20px; background-color: #ccc; border-radius: 20px; position: relative; outline: none;">
     </div>
-    <b><p style="color: red;">{{ error_message }} !</p></b>
+    <b><p style="color: red;">{{ error_message }}</p></b>
 
     <form id="registration-form" action="{{ url_for('register') }}" method="post">
         <!-- Registration Form Fields -->
-        <label for="p_id">Id:</label>
-        <input type="number" id="p_id" name="p_id" required><br>
-
         <label for="p_name">Username:</label>
         <input type="text" id="p_name" name="p_name" required><br>
 
@@ -49,7 +69,7 @@
 
     <form id="login-form" action="{{ url_for('login') }}" method="post" style="display: none;">
         <!-- Login Form Fields -->
-        <label for="username">Username/Email:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
 
         <label for="password">Password:</label>

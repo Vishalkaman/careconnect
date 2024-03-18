@@ -281,7 +281,7 @@ def add_user_to_database(p_id, p_name,p_age, password, confirm_password, address
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
-        p_id = request.form['p_id']
+        p_id = get_number_of_entries('person')+11
         p_name = request.form['p_name']
         p_age = request.form['p_age']
         password = request.form['password']
@@ -556,7 +556,7 @@ def submit_feedback():
 
         success, error_message = add_feedback(review_id, comment, orphanage_id, datetime.date.today())
     
-        return render_template('index.html', success=success, error_message=error_message)
+        return render_template('feedback_submit.html', success=success, error_message=error_message)
 #===============  FEEDBACK ==========================
 
 #===============  VOLUNTEER ==========================
